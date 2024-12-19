@@ -11,10 +11,14 @@ st.set_page_config(page_title="Advanced Periodic Table Visualizer", layout="wide
 # Load Dataset Function
 @st.cache_data
 def load_data(filepath):
-    if not os.path.exists(filepath):
-        st.error(f"File not found: {filepath}")
+    try:
+        if not os.path.exists(filepath):
+            st.error(f"File not found: {filepath}")
+            st.stop()
+        return pd.read_csv(filepath)
+    except Exception as e:
+        st.error(f"An error occurred while loading the dataset: {e}")
         st.stop()
-    return pd.read_csv(filepath)
 
 # Dataset Path (Update this path as needed)
 DATA_PATH = "data/Periodic Table of Elements.csv"
@@ -496,52 +500,65 @@ with tab4:
     filtered_df = df[(df['AtomicNumber'] >= atomic_number_range[0]) & 
                      (df['AtomicNumber'] <= atomic_number_range[1])]
 
-    # Select axes and bubble properties
-    x_property = st.selectbox("X-Axis Property", filtered_df.columns[4:], index=0)
-    y_property = st.selectbox("Y-Axis Property", filtered_df.columns[4:], index=1)
-    z_property = st.selectbox("Z-Axis Property", filtered_df.columns[4:], index=2)
-    size_property = st.selectbox("Bubble Size Property", filtered_df.columns[4:], index=3)
-    color_property = st.selectbox("Bubble Color Property", filtered_df.columns[4:], index=4)
-    
-    # Log transformation option
-    log_scale = st.checkbox("Apply Logarithmic Scale to Axes", value=False)
+    # Filter numeric columns only
+    numeric_columns = filtered_df.select_dtypes(include=['number']).columns.tolist()
 
-    # Plot the 3D scatter plot
-    fig_3d = px.scatter_3d(
-        filtered_df,
-        x=x_property,
-        y=y_property,
-        z=z_property,
-        size=size_property,
-        color=color_property,
-        hover_data=["Element", "Symbol", "AtomicNumber", "Mass", "Density", "IonizationEnergy"],
-        title="3D Bubble Plot of Atomic Properties"
-    )
-    
-    # Apply logarithmic scale if selected
-    if log_scale:
-        fig_3d.update_layout(
-            scene=dict(
-                xaxis=dict(type="log"),
-                yaxis=dict(type="log"),
-                zaxis=dict(type="log")
-            )
-        )
-    
-    # Advanced color mapping options
-    color_scale = st.selectbox(
-        "Select Color Scale",
-        ["Viridis", "Cividis", "Plasma", "Inferno", "Jet"]
-    )
-    fig_3d.update_traces(marker=dict(colorscale=color_scale))
-    
-    # Add more customization options for marker size and opacity
-    marker_size = st.slider("Bubble Size Adjustment", min_value=5, max_value=30, value=10)
-    fig_3d.update_traces(marker=dict(size=filtered_df[size_property] * marker_size))
+    if len(numeric_columns) < 5:
+        st.error("Not enough numeric columns in the dataset for 3D plotting. Please check your data.")
+    else:
+        x_property = st.selectbox("X-Axis Property", numeric_columns, index=0)
+        y_property = st.selectbox("Y-Axis Property", numeric_columns, index=1)
+        z_property = st.selectbox("Z-Axis Property", numeric_columns, index=2)
+        size_property = st.selectbox("Bubble Size Property", numeric_columns, index=3)
+        color_property = st.selectbox("Bubble Color Property", numeric_columns, index=4)
 
-    # Display plot
-    st.plotly_chart(fig_3d, use_container_width=True)
-    
+        # Preprocess the data
+        filtered_df = filtered_df.dropna(subset=[x_property, y_property, z_property, size_property, color_property])
+        filtered_df[x_property] = pd.to_numeric(filtered_df[x_property], errors='coerce')
+        filtered_df[y_property] = pd.to_numeric(filtered_df[y_property], errors='coerce')
+        filtered_df[z_property] = pd.to_numeric(filtered_df[z_property], errors='coerce')
+        filtered_df[size_property] = pd.to_numeric(filtered_df[size_property], errors='coerce')
+        filtered_df[color_property] = pd.to_numeric(filtered_df[color_property], errors='coerce')
+        filtered_df = filtered_df.dropna()
+
+        if filtered_df.empty:
+            st.warning("No data available for the selected filters or properties.")
+        else:
+            try:
+                # Plot the 3D scatter plot
+                fig_3d = px.scatter_3d(
+                    filtered_df,
+                    x=x_property,
+                    y=y_property,
+                    z=z_property,
+                    size=size_property,
+                    color=color_property,
+                    hover_data=["Element", "Symbol", "AtomicNumber", "AtomicMass", "Density", "IonizationEnergy"]
+,
+                    title="3D Bubble Plot of Atomic Properties"
+                )
+
+                # Apply logarithmic scale if selected
+                log_scale = st.checkbox("Apply Logarithmic Scale to Axes", value=False)
+                if log_scale:
+                    fig_3d.update_layout(
+                        scene=dict(
+                            xaxis=dict(type="log"),
+                            yaxis=dict(type="log"),
+                            zaxis=dict(type="log")
+                        )
+                    )
+
+                # Customize marker size
+                marker_size = st.slider("Bubble Size Adjustment", min_value=5, max_value=30, value=10)
+                fig_3d.update_traces(marker=dict(size=filtered_df[size_property] * marker_size))
+
+                # Display plot
+                st.plotly_chart(fig_3d, use_container_width=True)
+
+            except Exception as e:
+                st.error(f"An error occurred while creating the 3D scatter plot: {e}")
+  
     
     
     
