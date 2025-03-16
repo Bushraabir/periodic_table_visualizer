@@ -35,43 +35,45 @@ An interactive and visually appealing web application for exploring the periodic
    ```bash
    git clone https://github.com/Bushraabir/periodic_table_visualizer.git
    cd periodic_table_visualizer
-Set up a virtual environment (optional but recommended):
+   ```
 
-bash
-Copy
-Edit
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-Install required packages:
+2. **Set up a virtual environment (optional but recommended):**
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-If a requirements.txt file is not available, install the libraries manually:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   ```
 
-bash
-Copy
-Edit
-pip install streamlit pandas plotly numpy scipy streamlit-plotly-events
-Verify required files/directories:
+3. **Install required packages:**
 
-data/Periodic Table of Elements.csv – CSV file with periodic table data.
-images/elements/ – Directory with element images (e.g., 1.png, 2.png, etc.).
-(Optional) images/banner.png – Banner image for the repository.
-💻 Running the Application
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   If a `requirements.txt` file is not available, install the libraries manually:
+
+   ```bash
+   pip install streamlit pandas plotly numpy scipy streamlit-plotly-events
+   ```
+
+4. **Verify required files/directories:**
+   - `data/Periodic Table of Elements.csv` – CSV file with periodic table data.
+   - `images/elements/` – Directory with element images (e.g., `1.png`, `2.png`, etc.).
+   - *(Optional)* `images/banner.png` – Banner image for the repository.
+
+## 💻 Running the Application
+
 Launch the Streamlit app with:
 
-bash
-Copy
-Edit
+```bash
 streamlit run app.py
-Replace app.py with your Python script's filename if different. The app will open in your default web browser, letting you interact with the periodic table, apply filters, visualize trends, and explore element details.
+```
 
-🗂️ Project Structure
-bash
-Copy
-Edit
+Replace `app.py` with your Python script's filename if different. The app will open in your default web browser, letting you interact with the periodic table, apply filters, visualize trends, and explore element details.
+
+## 🗂️ Project Structure
+
+```bash
 periodic_table_visualizer/
 │
 ├── app.py                      # Main Streamlit application script
@@ -82,32 +84,35 @@ periodic_table_visualizer/
 │   └── elements/               # Directory containing element images (1.png, 2.png, ..., 118.png)
 ├── requirements.txt            # Python dependencies
 └── README.md                   # This file
-🤝 Contributing
+```
+
+## 🤝 Contributing
+
 Contributions are welcome! To contribute:
 
-Fork the repository.
+1. **Fork the repository.**
+2. **Create a new branch:**
 
-Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
 
-bash
-Copy
-Edit
-git checkout -b feature/your-feature
-Make your changes and commit them:
+3. **Make your changes and commit them:**
 
-bash
-Copy
-Edit
-git commit -m 'Add new feature'
-Push to your branch:
+   ```bash
+   git commit -m 'Add new feature'
+   ```
 
-bash
-Copy
-Edit
-git push origin feature/your-feature
-Open a Pull Request describing your changes.
+4. **Push to your branch:**
 
-🙏 Acknowledgments
-Streamlit: For providing an easy-to-use platform for building interactive web applications.
-Plotly: For their powerful visualization tools.
-Open Source Community: For countless resources and inspiration in data visualization.
+   ```bash
+   git push origin feature/your-feature
+   ```
+
+5. **Open a Pull Request describing your changes.**
+
+## 🙏 Acknowledgments
+
+- **Streamlit:** For providing an easy-to-use platform for building interactive web applications.
+- **Plotly:** For their powerful visualization tools.
+- **Open Source Community:** For countless resources and inspiration in data visualization.
