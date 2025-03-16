@@ -1,95 +1,113 @@
-Advanced Periodic Table Visualizer
+# ⚛️ Periodic Table Visualizer
 
-Overview
+An interactive and visually appealing web application for exploring the periodic table of elements, built with [Streamlit](https://streamlit.io/) and [Plotly](https://plotly.com/). This project lets you filter elements, visualize trends, and dive into detailed element analytics with a modern, intuitive interface.
 
-The Advanced Periodic Table Visualizer is an interactive web application designed for exploring the periodic table with an intuitive and engaging user experience. Built with Streamlit, Plotly, and Pandas, it offers advanced data visualizations, statistical insights, and customizable filters for a comprehensive understanding of elemental properties and periodic trends.
+## 🌟 Features
 
-Features
+- **Interactive Periodic Table:**  
+  - 🔍 Explore elements in a grid with tooltips and hover effects.  
+  - 🎨 Color-coded differentiation for element types (e.g., metals, nonmetals, lanthanides, actinides).
 
-🔍 Interactive Filters
+- **Data Analysis & Filtering:**  
+  - 🔎 Filter elements by name, group, period, metal type, and radioactivity.  
+  - 📊 Select columns, search for values, and download filtered data as CSV.
 
-Search elements by name, symbol, or atomic number.
+- **Trend Visualization:**  
+  - 📈 Compare element properties across atomic numbers with interactive line charts.  
+  - ✨ Options for smoothing, markers, and customizable line styles.
 
-Filter by group, period, metal/non-metal, and radioactivity.
+- **3D Analytics:**  
+  - 🌐 Analyze 3D relationships between properties using customizable scatter plots.  
+  - 📏 Dynamic selection for axes, bubble size, and color mapping.
 
-Real-time updates based on applied filters.
+- **Element Gallery:**  
+  - 🖼️ Browse visual representations and images of elements.  
+  - 🖥️ Enjoy a clean, responsive layout with adjustable elements per row.
 
-📊 Data Visualization
+- **Element-Level Details:**  
+  - 🔬 Detailed view of each element including atomic number, mass, density, boiling/melting points, ionization energy, and more.  
+  - 📚 Comprehensive definitions and explanations for key chemical properties.
 
-Interactive Periodic Table: A structured and color-coded layout for quick identification.
+## 🚀 Installation
 
-Tabular View: Sortable and filterable table displaying all elements with key properties.
+1. **Clone the repository:**
 
-Graphical Analysis: Visualize trends like atomic radius, ionization energy, and electronegativity through dynamic charts.
+   ```bash
+   git clone https://github.com/Bushraabir/periodic_table_visualizer.git
+   cd periodic_table_visualizer
+Set up a virtual environment (optional but recommended):
 
-3D Visualization: Interactive 3D models for exploring periodic trends dynamically.
+bash
+Copy
+Edit
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+Install required packages:
 
-Radar Charts: Compare multiple properties across selected elements.
-
-Element Insights: Detailed element profiles including discovery, applications, and chemical behavior.
-
-Technology Stack
-
-Python (Core development)
-
-Streamlit (Web framework for interactivity)
-
-Pandas (Data handling and analysis)
-
-Plotly (Advanced data visualization)
-
-Installation & Setup
-
-Prerequisites
-
-Ensure you have Python 3.7+ installed.
-
-Installation Steps
-
-Clone the repository:
-
-git clone https://github.com/your-repo/periodic-table-visualizer.git
-cd periodic-table-visualizer
-
-Install dependencies:
-
+bash
+Copy
+Edit
 pip install -r requirements.txt
+If a requirements.txt file is not available, install the libraries manually:
 
-Run the application:
+bash
+Copy
+Edit
+pip install streamlit pandas plotly numpy scipy streamlit-plotly-events
+Verify required files/directories:
 
+data/Periodic Table of Elements.csv – CSV file with periodic table data.
+images/elements/ – Directory with element images (e.g., 1.png, 2.png, etc.).
+(Optional) images/banner.png – Banner image for the repository.
+💻 Running the Application
+Launch the Streamlit app with:
+
+bash
+Copy
+Edit
 streamlit run app.py
+Replace app.py with your Python script's filename if different. The app will open in your default web browser, letting you interact with the periodic table, apply filters, visualize trends, and explore element details.
 
-Open the provided URL in your browser to start using the visualizer.
+🗂️ Project Structure
+bash
+Copy
+Edit
+periodic_table_visualizer/
+│
+├── app.py                      # Main Streamlit application script
+├── data/
+│   └── Periodic Table of Elements.csv   # CSV file with element data
+├── images/
+│   ├── banner.png              # Optional banner image for the repo
+│   └── elements/               # Directory containing element images (1.png, 2.png, ..., 118.png)
+├── requirements.txt            # Python dependencies
+└── README.md                   # This file
+🤝 Contributing
+Contributions are welcome! To contribute:
 
-Data Source
+Fork the repository.
 
-The periodic table dataset is stored in data/Periodic Table of Elements.csv. Ensure the dataset is placed in the data/ directory before running the application.
+Create a new branch:
 
-Usage
+bash
+Copy
+Edit
+git checkout -b feature/your-feature
+Make your changes and commit them:
 
-Adjust the sidebar filters to refine searches.
+bash
+Copy
+Edit
+git commit -m 'Add new feature'
+Push to your branch:
 
-Navigate through different tabs to access multiple views and insights.
+bash
+Copy
+Edit
+git push origin feature/your-feature
+Open a Pull Request describing your changes.
 
-Hover over interactive graphs for detailed information.
-
-Click on elements to explore comprehensive details.
-
-Future Enhancements
-
-🧪 Enhanced Visualizations (e.g., molecular structures, bonding interactions).
-
-📡 Real-Time Data Updates via API integration.
-
-🌍 Multi-language Support for broader accessibility.
-
-🔬 AI-based Predictions for undiscovered element properties.
-
-Contributions
-
-Contributions are welcome! Report issues, suggest improvements, or submit pull requests.
-
-License
-
-This project is licensed under the MIT License.
-
+🙏 Acknowledgments
+Streamlit: For providing an easy-to-use platform for building interactive web applications.
+Plotly: For their powerful visualization tools.
+Open Source Community: For countless resources and inspiration in data visualization.
